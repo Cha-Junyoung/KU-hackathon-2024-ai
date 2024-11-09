@@ -109,6 +109,8 @@ public class OpenAIService {
         HttpEntity<String> entity = new HttpEntity<>(requestJson, headers);
         ResponseEntity<String> response = restTemplate.exchange(TEXT_API_URL, HttpMethod.POST, entity, String.class);
 
+        log.info("Response: {}", response);
+
         // JSON 파싱하여 content만 추출
         JSONObject jsonResponse = new JSONObject(response.getBody());
         String content = jsonResponse.getJSONArray("choices").getJSONObject(0).getJSONObject("message").getString("content");
@@ -116,14 +118,14 @@ public class OpenAIService {
         content = content.replaceAll("\n", " ");
 
         String emotion = switch (content) {
-            case String c when c.contains("\"기쁨\"") -> "JOY";
-            case String c when c.contains("\"화남\"") -> "ANGRY";
-            case String c when c.contains("\"슬픔\"") -> "SAD";
-            case String c when c.contains("\"두려움\"") -> "AFRAID";
-            case String c when c.contains("\"감탄\"") -> "ADMIRATION";
-            case String c when c.contains("\"놀람\"") -> "SURPRISE";
-            case String c when c.contains("\"호기심\"") -> "INTEREST";
-            case String c when c.contains("\"따분함\"") -> "BORING";
+            case String c when c.contains("기쁨") -> "JOY";
+            case String c when c.contains("화남") -> "ANGRY";
+            case String c when c.contains("슬픔") -> "SAD";
+            case String c when c.contains("두려움") -> "AFRAID";
+            case String c when c.contains("감탄") -> "ADMIRATION";
+            case String c when c.contains("놀람") -> "SURPRISE";
+            case String c when c.contains("호기심") -> "INTEREST";
+            case String c when c.contains("따분함") -> "BORING";
             default -> "UNKNOWN";
         };
 
