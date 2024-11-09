@@ -1,6 +1,5 @@
 package com.example.KU_2024_hackathon.service;
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 
 import java.io.InputStream;
 import java.net.URL;
@@ -29,7 +27,7 @@ public class OpenAIService {
     private String API_KEY;
 
     public byte[] generateImage(String prompt) {
-        log.info("Generating image start");
+        log.info("Generating image start with DALL·E 3");
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
@@ -37,13 +35,13 @@ public class OpenAIService {
         headers.set("Authorization", "Bearer " + API_KEY);
 
         String requestJson = "{" +
+                "\"model\":\"dall-e-3\"," +
                 "\"prompt\":\"" + prompt + "\"," +
                 "\"n\":1," +
                 "\"size\":\"512x512\"" +
                 "}";
 
         HttpEntity<String> entity = new HttpEntity<>(requestJson, headers);
-
         ResponseEntity<String> response = restTemplate.exchange(IMAGE_API_URL, HttpMethod.POST, entity, String.class);
 
         // JSON 파싱하여 URL 추출
@@ -71,7 +69,7 @@ public class OpenAIService {
     }
 
     public String generateText(String prompt) {
-        log.info("Generating text start");
+        log.info("Generating text start with GPT-4o");
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
@@ -79,11 +77,10 @@ public class OpenAIService {
         headers.set("Authorization", "Bearer " + API_KEY);
 
         String requestJson = "{" +
-                "\"model\":\"gpt-3.5-turbo\"," +
+                "\"model\":\"gpt-4o\"," +
                 "\"messages\":[{\"role\":\"user\",\"content\":\"" + prompt + "\"}]," +
                 "\"max_tokens\":1000" +
                 "}";
-
 
         HttpEntity<String> entity = new HttpEntity<>(requestJson, headers);
         ResponseEntity<String> response = restTemplate.exchange(TEXT_API_URL, HttpMethod.POST, entity, String.class);
@@ -93,11 +90,11 @@ public class OpenAIService {
         String content = jsonResponse.getJSONArray("choices").getJSONObject(0).getJSONObject("message").getString("content");
 
         log.info("Generated text: {}", content);
-        return content; // 텍스트를 리턴
+        return content;
     }
 
     public String analyzeEmotion(String prompt) {
-        log.info("Generating emotion start");
+        log.info("Generating emotion start with GPT-4o");
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
@@ -105,11 +102,10 @@ public class OpenAIService {
         headers.set("Authorization", "Bearer " + API_KEY);
 
         String requestJson = "{" +
-                "\"model\":\"gpt-3.5-turbo\"," +
+                "\"model\":\"gpt-4o\"," +
                 "\"messages\":[{\"role\":\"user\",\"content\":\"" + prompt + "\"}]," +
                 "\"max_tokens\":10" +
                 "}";
-
 
         log.info("Request body: {}", requestJson);
         HttpEntity<String> entity = new HttpEntity<>(requestJson, headers);
@@ -119,7 +115,7 @@ public class OpenAIService {
         JSONObject jsonResponse = new JSONObject(response.getBody());
         log.info("Response body: {}", response.getBody());
         String content = jsonResponse.getJSONArray("choices").getJSONObject(0).getJSONObject("message").getString("content");
-        
+
         String emotion = switch (content) {
             case String c when c.contains("기쁨") -> "joy";
             case String c when c.contains("화남") -> "angry";
@@ -133,6 +129,6 @@ public class OpenAIService {
         };
 
         log.info("Generated emotion: {}", emotion);
-        return emotion; // 감정을 리턴
+        return emotion;
     }
 }
