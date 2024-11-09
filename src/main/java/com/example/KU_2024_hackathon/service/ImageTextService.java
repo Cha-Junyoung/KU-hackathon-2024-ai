@@ -17,15 +17,19 @@ public class ImageTextService {
     public ImageTextResponseDto createTextWithImages(String q1, String a1, String q2, String a2, String q3, String a3) throws IOException {
         // Step 0: 텍스트 생성
         String requestText =
-                q1 + " 에 대한 응답은 " + a1 + " 이고, "
-                + q2 + " 에 대한 응답은 " + a2 + " 이고, "
-                + q3 + " 에 대한 응답은 " + a3 + " 입니다. ";
+                String.format("1번 질문은 %s 이고, 여기에 대한 응답은 %s 입니다.\n"
+                        + "2번 질문은 %s 이고, 여기에 대한 응답은 %s 입니다.\n"
+                        + "3번 질문은 %s 이고, 여기에 대한 응답은 %s 입니다.\n",
+                        q1, a1, q2, a2, q3, a3);
 
         log.info("requestText: {}", requestText);
 
         // Step 1: OpenAI API로 일기 생성
         String generatedTextPrompt =
-                requestText + "해당 내용을 정리하여 일기를 작성해주세요.";
+                requestText + "\n해당 내용을 정리하여 일기를 작성해주세요."
+                + "일기 내용은 400자 이내로 작성해주세요."
+                + "일기 형식은 ~이다, ~했다 와 같이 작성해주세요."
+                + "주어진 질문과 응답에 기반하여 작성하고, 허구의 사실을 창작하여서는 절대 안됩니다.";
 
 
         String textData = openAIService.generateText(generatedTextPrompt);
@@ -35,7 +39,8 @@ public class ImageTextService {
 
         // Step 2: OpenAI API로 이미지 생성
         String generatedImagePrompt =
-                requestText + "해당 내용에 적절한 이미지를 생성해주세요";
+                requestText + "\n해당 내용에 적절한 이미지를 생성해주세요"
+                + "이미지는 해당 내용에 나타나는 감정을 적절히 표현할 수 있는 이미지여야 합니다.";
 
         byte[] imageData = openAIService.generateImage(generatedImagePrompt);
 

@@ -39,7 +39,7 @@ public class OpenAIService {
         String requestJson = "{" +
                 "\"prompt\":\"" + prompt + "\"," +
                 "\"n\":1," +
-                "\"size\":\"1024x1024\"" +
+                "\"size\":\"512x512\"" +
                 "}";
 
         HttpEntity<String> entity = new HttpEntity<>(requestJson, headers);
