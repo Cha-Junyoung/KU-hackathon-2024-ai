@@ -22,11 +22,20 @@ public class ImageTextController {
     @PostMapping("/create")
     public ResponseEntity<ImageTextResponseDto> createJournal(@RequestBody ImageTextRequestDto req) throws IOException {
         String q1 = req.getQuestion1();
+        if (q1.contains("\n")) q1 = q1.replace("\n", " ");
         String a1 = req.getAnswer1();
+        if (a1.contains("\n")) a1 = a1.replace("\n", " ");
         String q2 = req.getQuestion2();
+        
+        if (q2.contains("\n")) q2 = q2.replace("\n", " ");
         String a2 = req.getAnswer2();
+        if (a2.contains("\n")) a2 = a2.replace("\n", " ");
+
         String q3 = req.getQuestion3();
+        if (q3.contains("\n")) q3 = q3.replace("\n", " ");
         String a3 = req.getAnswer3();
+        if (a3.contains("\n")) a3 = a3.replace("\n", " ");
+
 
         // 감정, text, 이미지 URL을 생성
         ImageTextResponseDto result = imageTextService.createTextWithImages(q1, a1, q2, a2, q3, a3);
