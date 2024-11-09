@@ -17,19 +17,19 @@ public class ImageTextService {
     public ImageTextResponseDto createTextWithImages(String q1, String a1, String q2, String a2, String q3, String a3) throws IOException {
         // Step 0: 텍스트 생성
         String requestText =
-                String.format("1번 질문은 %s 이고, 여기에 대한 응답은 %s 입니다.\n"
-                        + "2번 질문은 %s 이고, 여기에 대한 응답은 %s 입니다.\n"
-                        + "3번 질문은 %s 이고, 여기에 대한 응답은 %s 입니다.\n",
+                String.format("1번 질문은 %s 이고, 여기에 대한 응답은 %s 입니다. "
+                        + "2번 질문은 %s 이고, 여기에 대한 응답은 %s 입니다. "
+                        + "3번 질문은 %s 이고, 여기에 대한 응답은 %s 입니다. ",
                         q1, a1, q2, a2, q3, a3);
 
         log.info("requestText: {}", requestText);
 
         // Step 1: OpenAI API로 일기 생성
         String generatedTextPrompt =
-                requestText + "\n해당 내용을 정리하여 일기를 작성해주세요."
-                + "일기 내용은 400자 이내로 작성해주세요."
-                + "일기 형식은 ~이다, ~했다 와 같이 작성해주세요."
-                + "주어진 질문과 응답에 기반하여 작성하고, 허구의 사실을 창작하여서는 절대 안됩니다.";
+                requestText + "해당 내용을 정리하여 일기를 작성해주세요. "
+                + "일기 내용은 400자 이내로 작성해주세요. "
+                + "일기 형식은 ~이다, ~했다 와 같이 작성해주세요. "
+                + "주어진 질문과 응답에 기반하여 작성하고, 허구의 사실을 창작하여서는 절대 안됩니다. ";
 
 
         String textData = openAIService.generateText(generatedTextPrompt);
@@ -39,15 +39,15 @@ public class ImageTextService {
 
         // Step 2: OpenAI API로 이미지 생성
         String generatedImagePrompt =
-                requestText + "\n해당 내용에 적절한 이미지를 생성해주세요"
-                + "이미지는 해당 내용에 나타나는 감정을 적절히 표현할 수 있는 이미지여야 합니다.";
+                requestText + "해당 내용에 적절한 이미지를 생성해주세요 "
+                + "이미지는 해당 내용에 나타나는 감정을 적절히 표현할 수 있는 이미지여야 합니다. ";
 
         byte[] imageData = openAIService.generateImage(generatedImagePrompt);
 
         // Step 3: 생성된 textData 로부터 감정 분석
         String analyzeEmotionPrompt =
-                textData + "해당 내용의 감정을 분석해주세요."
-                + "기쁨, 화남, 슬픔, 두려움, 감탄, 놀람, 호기심, 따분함 중 하나로 분류해주세요.";
+                textData + "해당 내용의 감정을 분석해주세요. "
+                + "기쁨, 화남, 슬픔, 두려움, 감탄, 놀람, 호기심, 따분함 중 하나로 분류해주세요. ";
 
         String emotion = openAIService.analyzeEmotion(analyzeEmotionPrompt);
 
