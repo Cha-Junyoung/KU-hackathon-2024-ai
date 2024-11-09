@@ -59,6 +59,7 @@ public class ImageTextService {
 
         // Step 4: S3에 이미지 업로드
         String imageUrl = s3Service.uploadImage(imageData, "diary_image_" + UUID.randomUUID() + ".png");
+        log.info("created image URL: {}", imageUrl);
 
         // Step 5: JSON 형태로 반환
         return ImageTextResponseDto.builder()
