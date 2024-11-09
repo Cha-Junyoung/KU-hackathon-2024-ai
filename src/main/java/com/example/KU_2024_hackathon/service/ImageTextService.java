@@ -27,7 +27,11 @@ public class ImageTextService {
         String generatedTextPrompt =
                 requestText + "해당 내용을 정리하여 일기를 작성해주세요.";
 
+
         String textData = openAIService.generateText(generatedTextPrompt);
+
+        // 생성된 문자열 내부의 모든 줄 바꿈 문자 제거
+        textData = textData.replaceAll("\n", " ");
 
         // Step 2: OpenAI API로 이미지 생성
         String generatedImagePrompt =

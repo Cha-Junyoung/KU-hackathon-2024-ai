@@ -81,7 +81,7 @@ public class OpenAIService {
         String requestJson = "{" +
                 "\"model\":\"gpt-3.5-turbo\"," +
                 "\"messages\":[{\"role\":\"user\",\"content\":\"" + prompt + "\"}]," +
-                "\"max_tokens\":2000" +
+                "\"max_tokens\":1000" +
                 "}";
 
 
@@ -111,11 +111,13 @@ public class OpenAIService {
                 "}";
 
 
+        log.info("Request body: {}", requestJson);
         HttpEntity<String> entity = new HttpEntity<>(requestJson, headers);
         ResponseEntity<String> response = restTemplate.exchange(TEXT_API_URL, HttpMethod.POST, entity, String.class);
 
         // JSON 파싱하여 content만 추출
         JSONObject jsonResponse = new JSONObject(response.getBody());
+        log.info("Response body: {}", response.getBody());
         String content = jsonResponse.getJSONArray("choices").getJSONObject(0).getJSONObject("message").getString("content");
         
         String emotion = switch (content) {
