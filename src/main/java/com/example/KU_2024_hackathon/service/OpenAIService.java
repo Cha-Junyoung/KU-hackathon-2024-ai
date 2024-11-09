@@ -114,7 +114,7 @@ public class OpenAIService {
         JSONObject jsonResponse = new JSONObject(response.getBody());
         String content = jsonResponse.getJSONArray("choices").getJSONObject(0).getJSONObject("message").getString("content");
 
-        content = content.replaceAll("\n", "\\n");
+        content = content.replaceAll("\n", "nn");
 
         String emotion = switch (content) {
             case String c when c.contains("기쁨") -> "JOY";
