@@ -39,7 +39,9 @@ public class ImageTextService {
         // Step 2: 생성된 textData 로부터 감정 분석
         String analyzeEmotionPrompt =
                 textData + "해당 내용의 감정을 분석해주세요. "
-                        + "기쁨, 화남, 슬픔, 두려움, 감탄, 놀람, 호기심, 따분함 중 하나로 분류해주세요. ";
+                        + "기쁨, 화남, 슬픔, 두려움, 감탄, 놀람, 호기심, 따분함 중 하나로 분류해주세요. "
+                        + "감정은 해당 내용을 읽고 느낀 감정을 기반으로 분류해주세요. "
+                        + "생성한 문장 첫 마디에 반드시 제시된 8개의 감정 중 하나를 출력하세요. ";
 
         String emotion = openAIService.analyzeEmotion(analyzeEmotionPrompt);
         log.info("Analyzed Emotion: {}", emotion);
