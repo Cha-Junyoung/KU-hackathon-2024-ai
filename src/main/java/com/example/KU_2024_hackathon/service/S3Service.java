@@ -33,7 +33,6 @@ public class S3Service {
                 .contentType("text/plain;charset=utf-8")
                 .build();
 
-        log.info(inputStream.toString());
         s3Client.putObject(putObjectRequest, RequestBody.fromInputStream(inputStream, textBytes.length));
 
         return generateFileUrl(filename);
