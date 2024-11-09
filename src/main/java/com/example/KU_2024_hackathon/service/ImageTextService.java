@@ -26,10 +26,11 @@ public class ImageTextService {
 
         // Step 1: OpenAI API로 일기 생성
         String generatedTextPrompt =
-                requestText + "해당 내용을 정리하여 일기를 작성해주세요. "
-                + "일기 내용은 400자 이내로 작성해주세요. "
-                + "일기는 ~이다, ~했다, ~겠다 와 같은 말로 마무리하는 문장의 형식으로 작성해주세요. "
-                + "주어진 질문과 응답에 기반하여 작성하고, 허구의 사실을 창작하여서는 절대 안됩니다. ";
+                requestText + "해당 내용들을 예술적으로 표현해주세요. "
+                + "표현은 시, 수필, 산문과 같은 양식으로 만들어주세요. "
+                + "표현을 생성할 때 1000자 이하의 분량으로 제한해주세요. "
+                + "창의적이면서도 나타난 감정을 충실히 표현하도록 노력해주세요. "
+                + "예술은 개인, 혹은 집단의 가치관을 공유하는 매개체라는 점에 착안하여 작성해주세요.";
 
         String textData = openAIService.generateText(generatedTextPrompt);
         textData = textData.replaceAll("\n", " ");
