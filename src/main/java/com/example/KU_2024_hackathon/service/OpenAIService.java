@@ -105,7 +105,7 @@ public class OpenAIService {
         String requestJson = "{" +
                 "\"model\":\"gpt-4o\"," +
                 "\"messages\":[{\"role\":\"user\",\"content\":\"" + prompt + "\"}]," +
-                "\"max_tokens\":10" +
+                "\"max_tokens\":50" +
                 "}";
 
         log.info("Request body: {}", requestJson);
