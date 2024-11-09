@@ -33,7 +33,7 @@ public class ImageTextService {
                 + "예술은 개인, 혹은 집단의 가치관을 공유하는 매개체라는 점에 착안하여 작성해주세요.";
 
         String textData = openAIService.generateText(generatedTextPrompt);
-        textData = textData.replaceAll("\n", "\\\n");
+        textData = textData.replaceAll("\n", "\\n");
 
         log.info("Generated Text: {}", textData);
 

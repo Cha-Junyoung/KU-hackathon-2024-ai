@@ -107,15 +107,14 @@ public class OpenAIService {
                 "}";
 
         HttpEntity<String> entity = new HttpEntity<>(requestJson, headers);
-        ResponseEntity<String> response = restTemplate.exchange(TEXT_API_URL, HttpMethod.POST, entity, String.class);
 
-        log.info("Response: {}", response);
+        ResponseEntity<String> response = restTemplate.exchange(TEXT_API_URL, HttpMethod.POST, entity, String.class);
 
         // JSON 파싱하여 content만 추출
         JSONObject jsonResponse = new JSONObject(response.getBody());
         String content = jsonResponse.getJSONArray("choices").getJSONObject(0).getJSONObject("message").getString("content");
 
-        content = content.replaceAll("\n", "\\\n");
+        content = content.replaceAll("\n", "\\n");
 
         String emotion = switch (content) {
             case String c when c.contains("기쁨") -> "JOY";
