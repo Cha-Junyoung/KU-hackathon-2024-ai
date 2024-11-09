@@ -115,17 +115,20 @@ public class OpenAIService {
         JSONObject jsonResponse = new JSONObject(response.getBody());
         log.info("Response body: {}", response.getBody());
         String content = jsonResponse.getJSONArray("choices").getJSONObject(0).getJSONObject("message").getString("content");
+        log.info("Extracted content: {}", content);
+
+        content = content.replaceAll("\n", " ");
 
         String emotion = switch (content) {
-            case String c when c.contains("기쁨") -> "joy";
-            case String c when c.contains("화남") -> "angry";
-            case String c when c.contains("슬픔") -> "sad";
-            case String c when c.contains("두려움") -> "afraid";
-            case String c when c.contains("감탄") -> "admiration";
-            case String c when c.contains("놀람") -> "surprise";
-            case String c when c.contains("호기심") -> "interest";
-            case String c when c.contains("따분함") -> "boring";
-            default -> "unknown";
+            case String c when c.contains("기쁨") -> "JOY";
+            case String c when c.contains("화남") -> "ANGRY";
+            case String c when c.contains("슬픔") -> "SAD";
+            case String c when c.contains("두려움") -> "AFRAID";
+            case String c when c.contains("감탄") -> "ADMIRATION";
+            case String c when c.contains("놀람") -> "SURPRISE";
+            case String c when c.contains("호기심") -> "INTEREST";
+            case String c when c.contains("따분함") -> "BORING";
+            default -> "UNKNOWN";
         };
 
         log.info("Generated emotion: {}", emotion);
