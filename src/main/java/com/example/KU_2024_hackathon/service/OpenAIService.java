@@ -84,6 +84,7 @@ public class OpenAIService {
 
         HttpEntity<String> entity = new HttpEntity<>(requestJson, headers);
         ResponseEntity<String> response = restTemplate.exchange(TEXT_API_URL, HttpMethod.POST, entity, String.class);
+        log.info("Response: {}", response);
 
         // JSON 파싱하여 content만 추출
         JSONObject jsonResponse = new JSONObject(response.getBody());

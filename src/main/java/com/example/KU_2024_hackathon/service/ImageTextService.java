@@ -40,7 +40,10 @@ public class ImageTextService {
         // Step 2: OpenAI API로 이미지 생성
         String generatedImagePrompt =
                 requestText + "해당 내용에 적절한 이미지를 생성해주세요 "
-                + "이미지는 해당 내용에 나타나는 감정을 적절히 표현할 수 있는 이미지여야 합니다. ";
+                + "이미지는 해당 내용에 나타나는 감정을 충분히 표현할 수 있는 이미지여야 합니다. "
+                + "또한, 이미지는 예술작품처럼 아름답게 그려져야 합니다. "
+                + "일러스트와 같은 단순한 이미지는 절대 생성해서는 안되며, "
+                + "감정을 충분히 표현할 수 있는 풍부한 색채를 이용해주세요. ";
 
         byte[] imageData = openAIService.generateImage(generatedImagePrompt);
 
