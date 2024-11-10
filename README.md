@@ -1,6 +1,6 @@
-# 야:경 (AI)
+# 아:경 (AI)
 
-야:경 AI repository 입니다.
+아:경 AI repository 입니다.
 
 ---
 
