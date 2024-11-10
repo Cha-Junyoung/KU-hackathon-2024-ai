@@ -59,11 +59,11 @@
 
 ### 배포 관련 설정
 
-${environment}
-BUCKET_NAME: AWS S3 Bucket name
-ACCESS_KEY: AWS S3 Access Key
-SECRET_KEY: AWS S3 Secret key
-REGION: AWS S3 Region
-OPENAI_API_KEY: OpenAI api key
+${environment}  
+BUCKET_NAME: AWS S3 Bucket name  
+ACCESS_KEY: AWS S3 Access Key  
+SECRET_KEY: AWS S3 Secret key  
+REGION: AWS S3 Region  
+OPENAI_API_KEY: OpenAI api key  
 
 ###
