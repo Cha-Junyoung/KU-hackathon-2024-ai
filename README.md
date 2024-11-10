@@ -16,19 +16,19 @@
     │  │      └─example
     │  │          └─KU_2024_hackathon
     │  │              ├─configuration
-    │  │              │   ├─S3Config.java
-    │  │              │   ├─SwaggerConfig.java
+    │  │              │   ├─S3Config.java          // to use S3 Storage
+    │  │              │   ├─SwaggerConfig.java    
     │  │              │   └─WebConfig.java
     │  │              ├─controller
-    │  │              │   └─imageTextController
+    │  │              │   └─imageTextController    // route request to generate text and image
     │  │              ├─dto
-    │  │              │   ├─imageTextRequestDto.java
-    │  │              │   └─imageTextResponseDto.java
+    │  │              │   ├─imageTextRequestDto.java    // request Dto
+    │  │              │   └─imageTextResponseDto.java   // response Dto
     │  │              ├─exception
     │  │              └─service
-    │  │                  ├─imageTextService.java
-    │  │                  ├─OpenAIService.java
-    │  │                  └─S3Service.java
+    │  │                  ├─imageTextService.java       
+    │  │                  ├─OpenAIService.java          // generate image, text, emotion
+    │  │                  └─S3Service.java              // save image
     │  └─resources
     └─test
         └─java
