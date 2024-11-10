@@ -16,10 +16,19 @@
     │  │      └─example
     │  │          └─KU_2024_hackathon
     │  │              ├─configuration
+    │  │              │   ├─S3Config.java
+    │  │              │   ├─SwaggerConfig.java
+    │  │              │   └─WebConfig.java
     │  │              ├─controller
+    │  │              │   └─imageTextController
     │  │              ├─dto
+    │  │              │   ├─imageTextRequestDto.java
+    │  │              │   └─imageTextResponseDto.java
     │  │              ├─exception
     │  │              └─service
+    │  │                  ├─imageTextService.java
+    │  │                  ├─OpenAIService.java
+    │  │                  └─S3Service.java
     │  └─resources
     └─test
         └─java
